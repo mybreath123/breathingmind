@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>배출호흡법 · 1버튼(휴식+3-2-1)</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --text:#e8ecff;
+      --muted:#aab4e6;
+      --muted2: rgba(232,236,255,.82);
+      --accent:rgba(122,167,255,.60);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", AppleSDGothicNeo, "Malgun Gothic", sans-serif;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(122,167,255,.18), transparent 55%),
+                  radial-gradient(900px 600px at 85% 20%, rgba(167,255,203,.12), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .card{
+      width:min(780px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .top{
+      padding:14px 16px 10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    h1{margin:0; font-size:16px; letter-spacing:.2px}
+    .sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.5;
+      max-width: 70ch;
+    }
+    .toggle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+      font-size:12.5px;
+      white-space:nowrap;
+    }
+    .toggle input{transform: scale(1.1)}
+    .main{
+      padding:16px;
+      display:grid;
+      gap:12px;
+    }
+
+    /* Stage typography (silent mode) */
+    .stage{
+      font-weight:950;
+      letter-spacing:.2px;
+      margin:2px 0 4px;
+      font-size:22px;
+      transition: font-size .2s ease, letter-spacing .2s ease, text-shadow .2s ease;
+    }
+    .line{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      transition: color .2s ease, font-size .2s ease;
+    }
+    .silent .stage{
+      font-size:30px;
+      letter-spacing:.4px;
+      text-shadow: 0 10px 26px rgba(0,0,0,.45);
+    }
+    .silent .line{
+      color: var(--muted2);
+      font-size:15px;
+    }
+
+    .stats{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .pill{
+      flex:1 1 140px;
+      min-width:140px;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .pill b{font-size:13px}
+    .pill span{color:var(--muted); font-size:13px}
+
+    .circleWrap{display:flex; align-items:center; justify-content:center; padding:6px 0 0}
+    .circle{width:320px; height:320px; max-width: 86vw; filter: drop-shadow(0 18px 40px rgba(0,0,0,.35));}
+    .centerText{font-variant-numeric: tabular-nums; font-weight:950; font-size:22px; fill: var(--text);}
+    .centerSub{font-weight:900; font-size:14px; fill: rgba(232,236,255,.72);}
+
+    .btnRow{display:flex; justify-content:center; padding:4px 0 12px;}
+    button{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(122,167,255,.28), rgba(122,167,255,.14));
+      border-color: rgba(122,167,255,.35);
+      color:var(--text);
+      padding:14px 18px;
+      border-radius: 16px;
+      cursor:pointer;
+      font-weight:950;
+      letter-spacing:.2px;
+      font-size:16px;
+      min-width: 260px;
+      transition: transform .06s ease, filter .2s ease;
+      user-select:none;
+    }
+    button:hover{filter: brightness(1.06)}
+    button:active{transform: translateY(1px)}
+    .hint{
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.55;
+      text-align:center;
+      padding:0 10px 14px;
+    }
+    .kbd{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:950;
+      font-size:12px;
+      margin:0 4px;
+    }
+    .footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:12px 16px 14px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.55;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="top">
+      <div>
+        <h1>배출호흡법 · 6초 내쉬기 / 3초 80% 들이쉬기 × 21회</h1>
+        <p class="sub">21회 완료 → <b>휴식 10초</b> → <b>3-2-1</b> → 자동 재시작 (반복 욕구 완화)</p>
+      </div>
+      <label class="toggle" title="OFF면 무소음 모드(텍스트 강조)로 전환됩니다.">
+        <input id="narration" type="checkbox" checked />
+        나레이션
+      </label>
+    </div>
+
+    <div class="main" id="main" aria-live="polite">
+      <div>
+        <div class="stage" id="stage">준비</div>
+        <p class="line" id="guideLine">의자에 바른 자세로 앉아, 힘을 풀어주세요.</p>
+      </div>
+
+      <div class="circleWrap">
+        <svg class="circle" viewBox="0 0 220 220" role="img" aria-label="호흡 게이지 원">
+          <circle cx="110" cy="110" r="84" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.10)" stroke-width="14"/>
+          <circle id="ring"
+                  cx="110" cy="110" r="84"
+                  fill="transparent"
+                  stroke="var(--accent)"
+                  stroke-width="14"
+                  stroke-linecap="round"
+                  stroke-dasharray="527.8"
+                  stroke-dashoffset="0"
+                  transform="rotate(-90 110 110)"/>
+          <text x="110" y="108" text-anchor="middle" class="centerText" id="pctText">80%</text>
+          <text x="110" y="130" text-anchor="middle" class="centerSub" id="subText">준비</text>
+        </svg>
+      </div>
+
+      <div class="stats">
+        <div class="pill"><b>반복</b><span id="count">0 / 21</span></div>
+        <div class="pill"><b>남은 시간</b><span id="timeLeft">-</span></div>
+        <div class="pill"><b>상태</b><span id="status">대기</span></div>
+      </div>
+
+      <div class="btnRow">
+        <button id="oneBtn">시작</button>
+      </div>
+
+      <div class="hint">
+        <span class="kbd">Space</span> 버튼과 동일 ·
+        <span class="kbd">N</span> 나레이션 On/Off
+      </div>
+    </div>
+
+    <div class="footer">
+      문구: <b>내쉬기</b> 때 “현재 불편한 일이나 사람을 내보냅니다” · <b>들이쉬기</b> 때 “우주의 사랑의 기운이 들어옵니다”
+    </div>
+  </div>
+
+  <script>
+    /**********************
+     * Config
+     **********************/
+    const EXHALE_SEC = 6;
+    const INHALE_SEC = 3;
+    const INHALE_TARGET = 0.80;
+    const EXHALE_TARGET = 0.00;
+    const TOTAL = 21;
+
+    const REST_SEC = 10;     // 휴식
+    const PRE_SEC  = 3;      // 3-2-1 프리카운트
+
+    // ✅ 요청 멘트
+    const EXHALE_MANTRA = "현재 불편한 일이나 사람을 내보냅니다";
+    const INHALE_MANTRA = "우주의 사랑의 기운이 들어옵니다";
+
+    /**********************
+     * Elements
+     **********************/
+    const mainEl = document.getElementById('main');
+
+    const stageEl = document.getElementById('stage');
+    const guideLineEl = document.getElementById('guideLine');
+
+    const ringEl = document.getElementById('ring');
+    const pctTextEl = document.getElementById('pctText');
+    const subTextEl = document.getElementById('subText');
+
+    const countEl = document.getElementById('count');
+    const timeLeftEl = document.getElementById('timeLeft');
+    const statusEl = document.getElementById('status');
+
+    const oneBtn = document.getElementById('oneBtn');
+    const narrationChk = document.getElementById('narration');
+
+    /**********************
+     * Ring
+     **********************/
+    const R = 84;
+    const CIRC = 2 * Math.PI * R;
+    ringEl.setAttribute('stroke-dasharray', String(CIRC));
+
+    const clamp = (x,a,b)=>Math.max(a,Math.min(b,x));
+    const now = ()=>performance.now();
+
+    function setGauge(p01){
+      const p = clamp(p01,0,1);
+      ringEl.setAttribute('stroke-dashoffset', String(CIRC * (1 - p)));
+      pctTextEl.textContent = `${Math.round(p * 100)}%`;
+    }
+    function formatSec(s){
+      if (!isFinite(s)) return '-';
+      return `${Math.max(0, Math.ceil(s))}초`;
+    }
+
+    /**********************
+     * Silent mode UI
+     **********************/
+    function applySilentMode(){
+      mainEl.classList.toggle('silent', !narrationChk.checked);
+    }
+
+    /**********************
+     * Narration (short + mantra)
+     **********************/
+    function isSpeechSupported(){
+      return 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+    }
+    let selectedVoice = null;
+
+    function pickKoreanVoice(){
+      if (!isSpeechSupported()) return null;
+      const voices = speechSynthesis.getVoices() || [];
+      const ko = voices.filter(v => (v.lang || '').toLowerCase().startsWith('ko'));
+      if (!ko.length) return null;
+      const hints = ['female','여성','yuna','seoyeon','sunhi','woman','girl'];
+      return ko.find(v => hints.some(h => (v.name||'').toLowerCase().includes(h))) || ko[0];
+    }
+    function initVoices(){
+      if (!isSpeechSupported()) return;
+      selectedVoice = pickKoreanVoice();
+    }
+    if (isSpeechSupported()){
+      initVoices();
+      speechSynthesis.onvoiceschanged = () => initVoices();
+    }
+    function speak(text){
+      if (!narrationChk.checked) return;
+      if (!isSpeechSupported()) return;
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR';
+      if (selectedVoice) u.voice = selectedVoice;
+      u.rate = 1.04;
+      u.pitch = 1.08;
+      u.volume = 1.0;
+      speechSynthesis.speak(u);
+    }
+
+    /**********************
+     * State machine (1 button)
+     **********************/
+    // mode: idle | running | paused
+    // phase: ready | exhale | inhale | rest | pre
+    const State = {
+      mode: 'idle',
+      phase: 'ready',
+      cycleDone: 0,
+
+      phaseStartMs: 0,
+      phaseDurMs: 0,
+      from: INHALE_TARGET,
+      to: INHALE_TARGET,
+
+      pausedProgress: 0,
+      raf: 0,
+
+      preCurrent: PRE_SEC,
+    };
+
+    function setStage(title, line){
+      stageEl.textContent = title;
+      subTextEl.textContent = title;
+      guideLineEl.textContent = line;
+    }
+    function updateCount(){
+      countEl.textContent = `${State.cycleDone} / ${TOTAL}`;
+    }
+    function setStatus(text){
+      statusEl.textContent = text;
+    }
+    function setButtonLabel(){
+      if (State.mode === 'idle') oneBtn.textContent = '시작';
+      else if (State.mode === 'running') {
+        if (State.phase === 'rest') oneBtn.textContent = '휴식 중(일시정지)';
+        else if (State.phase === 'pre') oneBtn.textContent = '시작 준비(일시정지)';
+        else oneBtn.textContent = '일시정지';
+      }
+      else if (State.mode === 'paused') oneBtn.textContent = '계속';
+    }
+    function cancelLoop(){
+      cancelAnimationFrame(State.raf);
+      State.raf = 0;
+    }
+
+    function beginIdle(){
+      cancelLoop();
+
+      State.mode = 'idle';
+      State.phase = 'ready';
+      State.cycleDone = 0;
+      State.preCurrent = PRE_SEC;
+
+      updateCount();
+      setGauge(INHALE_TARGET);
+      timeLeftEl.textContent = '-';
+      setStatus('대기');
+      setStage('준비', '의자에 바른 자세로 앉아, 힘을 풀어주세요.');
+      applySilentMode();
+      setButtonLabel();
+      speak('준비');
+    }
+
+    function beginPhase(phase, durSec, from, to){
+      State.phase = phase;
+      State.phaseStartMs = now();
+      State.phaseDurMs = durSec * 1000;
+      State.from = from;
+      State.to = to;
+      applyProgress(0);
+      setButtonLabel();
+    }
+
+    function beginExhale(){
+      beginPhase('exhale', EXHALE_SEC, INHALE_TARGET, EXHALE_TARGET);
+      setStage('내쉬기', EXHALE_MANTRA);
+      setStatus('진행 중');
+      // ✅ 짧게 + 핵심 멘트
+      speak(`내쉬기. ${EXHALE_MANTRA}`);
+    }
+
+    function beginInhale(){
+      beginPhase('inhale', INHALE_SEC, EXHALE_TARGET, INHALE_TARGET);
+      setStage('들이쉬기', INHALE_MANTRA);
+      setStatus('진행 중');
+      speak(`들이쉬기. ${INHALE_MANTRA}`);
+    }
+
+    function beginRest(){
+      beginPhase('rest', REST_SEC, INHALE_TARGET, INHALE_TARGET);
+      setGauge(INHALE_TARGET);
+      setStage('휴식', '10초 쉽니다.');
+      setStatus('휴식');
+      speak('휴식');
+    }
+
+    function beginPrecount(){
+      State.preCurrent = PRE_SEC;
+      beginPhase('pre', PRE_SEC, INHALE_TARGET, INHALE_TARGET);
+      setGauge(INHALE_TARGET);
+      setStatus('준비');
+      setStage('3', '곧 시작합니다.');
+      speak('3');
+    }
+
+    function applyProgress(p01){
+      const p = clamp(p01,0,1);
+
+      if (State.phase === 'rest' || State.phase === 'pre'){
+        setGauge(INHALE_TARGET);
+      } else {
+        const value = State.from + (State.to - State.from) * p;
+        setGauge(value);
+      }
+
+      const remainingMs = State.phaseDurMs * (1 - p);
+      timeLeftEl.textContent = formatSec(remainingMs / 1000);
+
+      // pre-count: 3-2-1 표시(초 바뀔 때만)
+      if (State.phase === 'pre'){
+        const remainingSec = Math.ceil(remainingMs / 1000); // 3..0
+        const next = clamp(remainingSec, 0, PRE_SEC);
+        const show = Math.max(1, next); // 3,2,1
+        if (show !== State.preCurrent && show >= 1){
+          State.preCurrent = show;
+          stageEl.textContent = String(show);
+          subTextEl.textContent = String(show);
+          guideLineEl.textContent = '곧 시작합니다.';
+          speak(String(show));
+        }
+      }
+    }
+
+    function loop(){
+      if (State.mode !== 'running') return;
+
+      const elapsed = now() - State.phaseStartMs;
+      const p = elapsed / State.phaseDurMs;
+
+      if (p >= 1){
+        applyProgress(1);
+
+        if (State.phase === 'exhale'){
+          beginInhale();
+        } else if (State.phase === 'inhale'){
+          State.cycleDone += 1;
+          updateCount();
+
+          if (State.cycleDone >= TOTAL){
+            beginRest(); // 완료 -> 휴식
+          } else {
+            beginExhale();
+          }
+        } else if (State.phase === 'rest'){
+          beginPrecount(); // 휴식 -> 3-2-1
+        } else if (State.phase === 'pre'){
+          State.cycleDone = 0;
+          updateCount();
+          beginExhale(); // 재시작
+        }
+      } else {
+        applyProgress(p);
+      }
+
+      State.raf = requestAnimationFrame(loop);
+    }
+
+    function startFresh(){
+      State.mode = 'running';
+      applySilentMode();
+      setStatus('진행 중');
+      setButtonLabel();
+
+      beginExhale(); // 항상 내쉬기로 시작
+      cancelLoop();
+      State.raf = requestAnimationFrame(loop);
+    }
+
+    function pause(){
+      if (State.mode !== 'running') return;
+      State.mode = 'paused';
+
+      const elapsed = now() - State.phaseStartMs;
+      State.pausedProgress = clamp(elapsed / State.phaseDurMs, 0, 1);
+
+      setStatus('일시정지');
+      applySilentMode();
+      setButtonLabel();
+      speak('정지');
+    }
+
+    function resume(){
+      if (State.mode !== 'paused') return;
+      State.mode = 'running';
+
+      if (State.phase === 'rest') setStatus('휴식');
+      else if (State.phase === 'pre') setStatus('준비');
+      else setStatus('진행 중');
+
+      applySilentMode();
+      setButtonLabel();
+
+      State.phaseStartMs = now() - (State.phaseDurMs * State.pausedProgress);
+
+      // 재개 시 현재 단계만 짧게(멤트 포함은 부담될 수 있어 단계만)
+      if (State.phase === 'exhale') speak('내쉬기');
+      else if (State.phase === 'inhale') speak('들이쉬기');
+      else if (State.phase === 'rest') speak('휴식');
+      else if (State.phase === 'pre') speak(String(State.preCurrent || 3));
+
+      cancelLoop();
+      State.raf = requestAnimationFrame(loop);
+    }
+
+    function oneButtonAction(){
+      if (State.mode === 'idle') startFresh();
+      else if (State.mode === 'running') pause();
+      else if (State.mode === 'paused') resume();
+    }
+
+    /**********************
+     * Events
+     **********************/
+    oneBtn.addEventListener('click', oneButtonAction);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); oneButtonAction(); }
+      if (e.key.toLowerCase() === 'n') {
+        narrationChk.checked = !narrationChk.checked;
+        if (!narrationChk.checked && isSpeechSupported()) speechSynthesis.cancel();
+        applySilentMode();
+      }
+    });
+
+    narrationChk.addEventListener('change', () => {
+      if (!narrationChk.checked && isSpeechSupported()) speechSynthesis.cancel();
+      applySilentMode();
+    });
+
+    // Init
+    beginIdle();
+  </script>
+</body>
+</html>
